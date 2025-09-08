@@ -1,0 +1,5 @@
+{
+  "name": "AI Fitness Tracker",
+  "description": "A modern, AI-powered web application for tracking diet, fitness, and health goals. It uses the Gemini API for intelligent nutrition analysis from free-text meal descriptions and personalized goal setting.",
+  "requestFramePermissions": []
+}
