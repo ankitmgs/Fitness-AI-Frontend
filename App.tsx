@@ -34,8 +34,15 @@ const Main: React.FC = () => {
 
   if (authLoading || (user && !isInitialized)) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-        <Spinner className="h-10 w-10" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <Spinner className="h-16 w-16 animate-spin-slow text-indigo-500" />
+        <div className="mt-6 flex flex-col items-center">
+          <div className="w-32 h-2 bg-gradient-to-r from-indigo-400 via-indigo-600 to-indigo-400 rounded-full animate-pulse mb-4" />
+          <span className="text-lg font-semibold text-center text-gray-700 dark:text-gray-200 animate-fade-in">
+            Please hold while we preparing your personalized experience...<br />
+            <span className="text-indigo-500 animate-bounce">Your fitness journey is about to begin!</span>
+          </span>
+        </div>
       </div>
     );
   }

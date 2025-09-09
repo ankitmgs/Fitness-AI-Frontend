@@ -9,19 +9,8 @@ const ProfileSetup: React.FC = () => {
   const { saveProfile } = useData();
   const { user } = useAuth();
 
-  const getDefaultName = () => {
-    if (user?.email) {
-      return user.email.split('@')[0]
-        .replace(/[._-]/g, ' ') // Replace common separators
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-        .join(' ');
-    }
-    return '';
-  };
-
   const [formData, setFormData] = useState({
-    name: getDefaultName(),
+    name: user?.displayName,
     age: '',
     weight: '',
     height: '',
@@ -87,33 +76,38 @@ const ProfileSetup: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">Set Up Your Profile</h2>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"/>
-          <input type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"/>
-          <input type="number" name="weight" placeholder="Weight (kg)" step="0.1" value={formData.weight} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"/>
-          <input type="number" name="height" placeholder="Height (cm)" value={formData.height} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600"/>
-          
-          <select name="gender" value={formData.gender} onChange={handleChange} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-indigo-200 to-indigo-300 dark:from-gray-900 dark:via-indigo-900 dark:to-gray-800 p-4 animate-fade-in">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-2xl relative overflow-hidden animate-slide-up">
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-24 h-24 bg-gradient-to-tr from-indigo-400 via-indigo-600 to-indigo-400 rounded-full blur-2xl opacity-60 animate-pulse-slow z-0" />
+        <h2 className="text-3xl font-extrabold text-center text-indigo-700 dark:text-indigo-300 z-10 animate-fade-in">
+          Welcome! <span className="block text-lg font-medium text-gray-700 dark:text-gray-200 animate-bounce">Let's set up your profile</span>
+        </h2>
+        <form className="space-y-5 z-10 relative" onSubmit={handleSubmit}>
+
+          <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200"/>
+          <input type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200"/>
+          <input type="number" name="weight" placeholder="Weight (kg)" step="0.1" value={formData.weight} onChange={handleChange} required className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200"/>
+          <input type="number" name="height" placeholder="Height (cm)" value={formData.height} onChange={handleChange} required className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200"/>
+
+          <select name="gender" value={formData.gender} onChange={handleChange} className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200">
             {Object.values(Gender).map(g => <option key={g} value={g}>{g}</option>)}
           </select>
 
-          <select name="activityLevel" value={formData.activityLevel} onChange={handleChange} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600">
+          <select name="activityLevel" value={formData.activityLevel} onChange={handleChange} className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200">
             {Object.values(ActivityLevel).map(al => <option key={al} value={al}>{al}</option>)}
           </select>
 
-          <select name="goal" value={formData.goal} onChange={handleChange} className="w-full px-3 py-2 border rounded-md dark:bg-gray-700 dark:border-gray-600">
+          <select name="goal" value={formData.goal} onChange={handleChange} className="w-full px-4 py-3 border-2 border-indigo-200 dark:border-indigo-700 rounded-lg dark:bg-gray-700 focus:ring-2 focus:ring-indigo-400 transition-all duration-200 text-indigo-700 dark:text-indigo-200">
             {Object.values(Goal).map(g => <option key={g} value={g}>{g}</option>)}
           </select>
 
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && <p className="text-red-500 text-sm text-center animate-shake">{error}</p>}
 
-          <button type="submit" disabled={isLoading} className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400 flex justify-center items-center">
-            {isLoading ? <Spinner /> : 'Save and Continue'}
+          <button type="submit" disabled={isLoading} className="w-full px-4 py-3 text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 rounded-lg hover:scale-105 hover:shadow-xl transition-all duration-200 disabled:opacity-60 flex justify-center items-center animate-fade-in">
+            {isLoading ? <Spinner /> : <span className="tracking-wide font-semibold">Save and Continue</span>}
           </button>
         </form>
+        <div className="absolute -bottom-10 right-0 w-24 h-24 bg-gradient-to-br from-indigo-400 via-indigo-600 to-indigo-400 rounded-full blur-2xl opacity-60 animate-pulse-slow z-0" />
       </div>
     </div>
   );
